@@ -10,8 +10,8 @@ char *temp;
 int main() {
 	
 	char* c = convert("PAYPALISHIRING", 3); // len is 14
-	printf("\n[Debug] c: {%s}", c);
-	//assertEquals("PAHNAPLSIIGYIR", c);
+	//printf("\n[Debug] c: {%s}", c);
+	assertEquals("PAHNAPLSIIGYIR", c);
 	free(c);
 	
 	/*
@@ -74,7 +74,7 @@ char* convert(char *s, int numRows){
 	}
 	
 	converted_string[len] = '\0';
-	char *c = malloc(100 * sizeof(char));
+	char *c = malloc(sizeof(char) * (len + 1));
 	if (c == NULL) {
 		printf("\n[Error] c is null");
 		return NULL;
@@ -84,12 +84,16 @@ char* convert(char *s, int numRows){
 	
 	index = 0;
 	//while (*c++ = converted_string[index++]) ;
-	*c = converted_string[0];
-	return c;
+	//*c = converted_string[0];
+
+        char *c_temp = c;
+	while (*c_temp++ = converted_string[index++])
+		;
+        return c;
 }
 
 void assertEquals(char *expected, char *actually){
-	int c_comp = 0;//strcmp(expected, actually);
-	printf("[Debug] actually {%s}", actually);
-	//printf("\n[Test] Expected: --%s-- Actual: --%s-- Result: --%s--", expected, actually, c_comp == 0 ? "Passed" : "Failed");
+	int c_comp = strcmp(expected, actually);
+	//printf("[Debug] actually {%s}", actually);
+	printf("\n[Test] Expected: --%s-- Actual: --%s-- Result: --%s--\n", expected, actually, c_comp == 0 ? "Passed" : "Failed");
 }
